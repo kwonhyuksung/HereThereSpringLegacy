@@ -1,0 +1,24 @@
+1. Spring Legacy Project 생성
+
+2. Java, Servlet 버전 설정
+
+3. pom.xml 설정
+	데이터소스 관련 라이브러리 설정 commons-beanutils, commons-dbcp, cglib-nodep
+	마이바티스 관련 라이브러리 설정 mybatis, mybatis-spring
+	MySQL 관련 라이브러리 설정 mysql-connector-java
+
+4. web.xml 설정
+	ContextLoaderListener 사용은 하지 않으므로 주석처리, root-context.xml 주석처리
+	DispatcherServlet 파일로 servlet-context.xml, myBatis.xml 설정, load-on-startup, *.do로 요청 설정
+	encoding filter 설정 UTF-8
+	welcome-file-list 설정 home.jsp
+
+5. servlet-context.xml 설정
+
+6. mybatis
+	pom.xml 설정
+	web.xml 설정
+	/WEB-INF/spring/myBatis.xml 생성,	Namespaces에서 context, mybatis-spring 체크
+	/WEB-INF/config/jdbc/jdbc.properties 생성
+
+7.
