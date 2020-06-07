@@ -49,7 +49,7 @@
 							    	<div class="p-2">
 							    		<input type="button" value="로그인" class="btn btn-primary py-3 px-4" data-toggle="modal" data-target="#myLoginModal">
 							    		&nbsp;&nbsp;&nbsp;&nbsp;
-							    		<input type="button" value="메인화면" class="btn btn-primary py-3 px-4" onclick="location.href='${root}/index.jsp'">
+							    		<input type="button" value="메인화면" class="btn btn-primary py-3 px-4" onclick="location.href='${root}/index.do'">
 							    	</div>			    
 								</div>				
 							</form>

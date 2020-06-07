@@ -6,6 +6,7 @@
 	데이터소스 관련 라이브러리 설정 commons-beanutils, commons-dbcp, cglib-nodep
 	마이바티스 관련 라이브러리 설정 mybatis, mybatis-spring
 	MySQL 관련 라이브러리 설정 mysql-connector-java
+	JSON 관련 라이브러리 설정 json-lib(<classifier>jdk15</classifier> 추가 필요)
 
 4. web.xml 설정
 	ContextLoaderListener 사용은 하지 않으므로 주석처리, root-context.xml 주석처리
@@ -17,8 +18,27 @@
 
 6. mybatis
 	pom.xml 설정
+		mybatis, mybatis-spring, spring-jdbc(스프링에서 데이터베이스 처리), spring-tx(스프링에서 트랜잭션 처리)
 	web.xml 설정
-	/WEB-INF/spring/myBatis.xml 생성,	Namespaces에서 context, mybatis-spring 체크
-	/WEB-INF/config/jdbc/jdbc.properties 생성
+	/WEB-INF/spring/myBatis.xml 생성 및 설정
+		Namespaces에서 context, mybatis-spring, tx 체크
+		/WEB-INF/config/jdbc/jdbc.properties 생성 및 설정
+			url에 인코딩과 멀티쿼리를 위한 옵션 추가
+		데이터베이스 연결 설정
+		SqlSessionFactory 설정
+			VO 연결을 위한 modelConfig.xml 설정
+			mapper 연결 설정
+		SqlSession 설정
+		트랜잭션 애노테이션 설정
+		언더스코어 형식의 데이터베이스 컬럼 이름을 카멜케이스 형식의 VO 변수이름으로 자동변환 설정 
+	src/main/resources 폴더 아래에 myBatis 폴더를 생성하고 mapper, model 폴더를 각각 생성
+	mapper 폴더에는 기능별 mapper 파일을 생성
+	model 폴더에는 modelConfig.xml 파일을 생성해서 myBatis에서 사용 될 VO들의 alias를 설정
 
-7.
+7. 그밖의
+	파일 업로드를 위해 라이브러리를 pom.xml에 등록 commons-fileupload, commons-io
+	파일 업로드를 위해 servlet-context.xml 파일에 CommonsMultipartResolver 클래스를 multipartResolver 빈으로 설정
+
+
+* 이미지가 저장되는 실제 디렉토리
+  D:\project\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\HereThereSpringLegacy\resources\images

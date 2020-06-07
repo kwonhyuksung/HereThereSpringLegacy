@@ -28,4 +28,11 @@
 		<beans:property name="contentType" value="application/json;charset=UTF-8" />
 	</beans:bean>
 	
+	<!-- 파일 업로드를 위한 multipartResolver 업로드 최대 용량은 5M, 메모리 사이즈는 100M, 인코딩은 UTF-8 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="52428800"></beans:property>
+		<beans:property name="maxInMemorySize" value="1000000"></beans:property>
+		<beans:property name="defaultEncoding" value="utf-8"></beans:property>
+	</beans:bean>
+	
 </beans:beans>

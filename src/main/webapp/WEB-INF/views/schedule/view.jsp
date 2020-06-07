@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -61,9 +60,13 @@
 								<p class="days">
 									<span>
 										#${scheduleVo.thema}<br>
-										<i class="icon-person"></i> ${scheduleVo.userId} <br> 
-										<i class="icon-today"></i> ${scheduleVo.startDate} ~ ${scheduleVo.endDate} (${scheduleVo.term}일)<br>
-										<i class="icon-pencil"></i> 게시일 : ${scheduleVo.logDate} &nbsp;|&nbsp; <i class="icon-pencil"></i> 최종 수정일 : ${scheduleVo.renewalDate}<br>
+										<i class="icon-person"></i> ${scheduleVo.userId} <br>
+										<fmt:formatDate var="fmtStartDate" pattern="yyyy-MM-dd" value="${scheduleVo.startDate}"/>
+										<fmt:formatDate var="fmtEndDate" pattern="yyyy-MM-dd" value="${scheduleVo.endDate}"/>
+										<i class="icon-today"></i> ${fmtStartDate} ~ ${fmtEndDate} (${scheduleVo.term}일)<br>
+										<fmt:formatDate var="fmtLogDate" pattern="yyyy-MM-dd HH:mm:ss" value="${scheduleVo.logDate}"/>
+										<fmt:formatDate var="fmtRenewalDate" pattern="yyyy-MM-dd HH:mm:ss" value="${scheduleVo.renewalDate}"/>
+										<i class="icon-pencil"></i> 게시일 : ${fmtLogDate} &nbsp;|&nbsp; <i class="icon-pencil"></i> 최종 수정일 : ${fmtRenewalDate}<br>
 									</span>
 								</p>
 							</div>

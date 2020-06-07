@@ -13,7 +13,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 <!-- 메뉴 좌상단의 '여기저기'를 클릭하면 초기화면으로 온다 -->
-			<a class="navbar-brand" href="${root}/index.jsp">여기저기</a>
+			<a class="navbar-brand" href="${root}/index.do">여기저기</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>

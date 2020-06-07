@@ -44,7 +44,7 @@ $(document).ready(function() {
 	makeScheduleList();
 	
 	// Review List
-	makeReviewList();
+	//makeReviewList();
 	
 });
 
@@ -126,6 +126,7 @@ function makeInfoListToHtml(xml){
 
 function makeScheduleList() {
 	var urlStr = contextPath + '/schedule/list.do';
+	var offset = 1;
 	// 게시물 유형 코드(1=일정, 2=후기, 3=답변)
 	postTypeCode = 1;
 	// 페이지의 정렬(1=인기순, 2=최신순)
@@ -138,12 +139,13 @@ function makeScheduleList() {
 	// 검색어
 	searchWord = "";
 	
-	var param = {"pg": 1, "listNumOfRows": LIST_COUNT, "postTypeCode": postTypeCode,
+	var param = {"offset": offset, "limit": LIST_COUNT, "postTypeCode": postTypeCode,
 				 "order": listOrder, "thema": thema, "minTerm": minTerm, "maxTerm": maxTerm, "searchWord": searchWord};
+	param = JSON.stringify(param);
 	
 	$.ajax({		
 		url : urlStr,
-		type : 'GET',
+		type : 'post',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
 		data: param,
@@ -198,6 +200,7 @@ function makeScheduleListHtml(json) {
 
 function makeReviewList() {
 	var urlStr = contextPath + "/review/list.do";
+	var offset = 1;
 	// 게시물 유형 코드(1=일정, 2=후기, 3=답변)
 	postTypeCode = 2;
 	// 페이지의 정렬(1=인기순, 2=최신순)
@@ -207,12 +210,13 @@ function makeReviewList() {
 	// 검색어
 	searchWord = "";
 	
-	var param = {"pg": 1, "listNumOfRows": LIST_COUNT, "postTypeCode": postTypeCode,
+	var param = {"offset": offset, "limit": LIST_COUNT, "postTypeCode": postTypeCode,
 				 "order": listOrder, "thema": thema, "searchWord": searchWord};
+	param = JSON.stringify(param);
 	
 	$.ajax({		
 		url : urlStr,
-		type : 'GET',
+		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
 		data: param,

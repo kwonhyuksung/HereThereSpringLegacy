@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,8 +44,7 @@
 			<input type="hidden" name="postSeq" id="postSeq" value="${scheduleVo.postSeq}">
 			<input type="hidden" name="postContent" id="postContent" value="">
 			<input type="hidden" name="term" id="term" value="">
-			<input type="hidden" name="uploadImage" id="uploadImage" value="">
-			<input type="hidden" name="updateImage" id="updateImage" value="">
+			<input type="hidden" name="uploadImage" id="uploadImage" value="0">
 		
 			<div class="container">
 				<div class="row">
@@ -68,12 +68,14 @@
 					         	<div class="col-md-12">
 									<!-- 달력1 -->
 				        			<div class="form-group">
-					                	<input type="text" name="startDate" id="startDate" class="form-control datepicker" value="${scheduleVo.startDate}" placeholder="출발일" readonly="readonly">
+				        				<fmt:formatDate var="fmtStartDate" pattern="yyyy-MM-dd" value="${scheduleVo.startDate}"/>
+					                	<input type="text" name="startDate" id="startDate" class="form-control datepicker" value="${fmtStartDate}" placeholder="출발일" readonly="readonly">
 					              	</div>
 					         	</div>
 					         	<div class="col-md-12">
 					             	 <div class="form-group">
-					                	<input type="text" name="endDate" id="endDate" class="form-control datepicker" value="${scheduleVo.endDate}" placeholder="도착일" readonly="readonly">
+					             	 	<fmt:formatDate var="fmtEndDate" pattern="yyyy-MM-dd" value="${scheduleVo.endDate}"/>
+					                	<input type="text" name="endDate" id="endDate" class="form-control datepicker" value="${fmtEndDate}" placeholder="도착일" readonly="readonly">
 					             	 </div>
 				       			</div>
 					         	<div class="col-md-12">

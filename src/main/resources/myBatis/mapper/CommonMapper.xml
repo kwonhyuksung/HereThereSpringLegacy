@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.common">
+
+	<update id="updateHitCount" parameterType="String">
+		update post set
+		hit_count = hit_count + 1
+		where post_seq = #{postSeq}
+	</update>
+	
+	<select id="selectMyDibs" parameterType="java.util.Map" resultType="int">
+		select count(*) as cnt
+		from dibs
+		where post_seq = #{postSeq} and user_id = #{userId} 
+	</select>
+	
+	<select id="selectDibsCount" parameterType="java.util.Map" resultType="int">
+		select count(*) as cnt
+		from dibs
+		where post_seq = #{postSeq} 
+	</select>
+    
+    <insert id="insertMyDibs" parameterType="java.util.Map">
+    	insert into dibs(post_seq, user_id)
+    	values(#{postSeq}, #{userId});
+    </insert>
+    
+    <delete id="deleteMyDibs" parameterType="java.util.Map">
+    	delete from dibs
+    	where post_seq = #{postSeq} and user_id = #{userId}
+    </delete>
+    
+    <select id="selectMyRecommend" parameterType="java.util.Map" resultType="int">
+    	select count(*) as cnt
+    	from recommend
+    	where post_seq = #{postSeq} and user_id = #{userId}
+    </select>
+    
+    <select id="selectRecommendCount" parameterType="java.util.Map" resultType="int">
+    	select count(*) as cnt
+    	from recommend
+    	where post_seq = #{postSeq}
+    </select>
+    
+    <insert id="insertMyRecommend" parameterType="java.util.Map">
+    	insert into recommend(post_seq, user_id)
+    	values(#{postSeq}, #{userId});
+    </insert>
+    
+    <delete id="deleteMyRecommend" parameterType="java.util.Map">
+    	delete from recommend
+    	where post_seq = #{postSeq} and user_id = #{userId}
+    </delete>
+    
+    <select id="selectCommentList" parameterType="java.util.Map" resultType="CommentVo">
+    	select a.post_seq as post_seq, post_type_code, board_code, user_id, post_title, post_content, hit_count, log_date, renewal_date,
+    	comment_seq, group_no, group_order, depth, parent_seq, reply_count
+    	from post a left join post_comment b on a.post_seq = b.post_seq
+    	where a.post_type_code = #{postTypeCode}
+    	and a.board_code = #{boardCode}
+    	and b.group_no = #{groupNo}
+    	order by group_order
+    </select>
+    
+    <select id="selectCommentCount" parameterType="java.util.Map" resultType="int">
+    	select count(*) as cnt
+    	from post_comment
+    	where group_no = #{groupNo}
+    </select>
+    
+    <update id="updateGroupOrderInGroupNo" parameterType="java.util.Map">
+    	update post_comment set
+    	group_order = group_order + 1
+    	where group_no = #{groupNo}
+    </update>
+    
+    <insert id="insertCommentInPost" parameterType="java.util.Map">
+    	insert into post(post_seq, post_type_code, board_code, user_id, post_title, post_content, log_date, renewal_date)
+    	values(#{postSeq}, #{postTypeCode}, #{boardCode}, #{userId}, #{postTitle}, #{postContent}, Now(), Now())
+    </insert>
+    
+    <insert id="insertComment" parameterType="java.util.Map">
+    	insert into post_comment(post_seq, group_no, group_order, depth, parent_seq)
+    	values(#{postSeq}, #{groupNo}, 1, #{depth}, #{parentSeq})
+    </insert>
+    
+    <update id="updateComment" parameterType="java.util.Map">
+    	update post set
+    	post_content = #{postContent},
+    	renewal_date = Now()
+    	where post_seq = #{postSeq}
+    </update>
+    
+    <delete id="deleteComment" parameterType="java.util.Map">
+    	delete from post_comment
+    	where post_seq = #{postSeq}
+    </delete>
+    
+    <delete id="deleteCommentInPost" parameterType="java.util.Map">
+    	delete from post
+    	where post_seq = #{postSeq}
+    </delete>
+    
+    <select id="getMaxPostSeq" resultType="String">
+    	select ifnull(max(post_seq) + 1, 1) as post_seq from post
+    </select>
+
+</mapper>

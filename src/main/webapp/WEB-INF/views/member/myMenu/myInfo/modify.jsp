@@ -27,23 +27,23 @@
 		var mpwerrorview = document.getElementById("pwblank");
 		var memailerrorview = document.getElementById("emailblank");
 		
-		var mnameCheck = $("#userName").val();
-		var mpassCheck = $("#userPass").val();
-		var memailCheck = $("#userEmail").val();
+		var mnameCheck = $("#modifyName").val();
+		var mpassCheck = $("#modifyPass").val();
+		var memailCheck = $("#modifyEmail").val();
 
-		if (document.getElementById("userId").value.trim().length == 0) {
+		if (document.getElementById("modifyId").value.trim().length == 0) {
 			alert("아이디를 입력해주세요.")
 			return;
-		} else if (document.getElementById("userName").value.trim().length == 0) {
+		} else if (document.getElementById("modifyName").value.trim().length == 0) {
 			alert("이름을 입력해주세요.")
 			return;
-		} else if (document.getElementById("userPass").value.trim().length == 0) {
+		} else if (document.getElementById("modifyPass").value.trim().length == 0) {
 			alert("비밀번호를 입력해주세요.")
 			return;
-		} else if (document.getElementById("userPass").value != document.getElementById("userPass1").value) {
+		} else if (document.getElementById("modifyPass").value != document.getElementById("userPass1").value) {
 			alert("비밀번호가 일치하지 않습니다.")
 			return;
-		} else if (document.getElementById("userEmail").value.trim().length == 0) {
+		} else if (document.getElementById("modifyEmail").value.trim().length == 0) {
 			alert("이메일을 입력해주세요.")
 			return;
 		} else if(nameJ.test(mnameCheck) == false){
@@ -73,9 +73,9 @@
 	
 	function changePass() {
 		var changepass = document.getElementById("changepassDiv");
-		$("#userPass").attr("readonly",false).attr("disabled",false);
+		$("#modifyPass").attr("readonly",false).attr("disabled",false);
 		$("#userPass1").attr("readonly",false).attr("disabled",false);
-		document.getElementById("userPass").value = null;
+		document.getElementById("modifyPass").value = null;
 		document.getElementById("userPass1").value = null;
 		 $("#chdiv").css("display", "none");
 	}
@@ -104,7 +104,7 @@
 <c:if test="${userInfo == null}">
 	<script>	
 	alert('로그인 세션이 만료되었습니다.'); 
-	document.location.href = "${root}/index.jsp";
+	document.location.href = "${root}/index.do";
 	</script>
 </c:if>
 	
@@ -143,20 +143,20 @@
 							<span class="login100-form-title"> 내정보 수정</span><br>
 							<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired" align="left">
 								<span class="label-input100">아이디(수정불가)</span>
-								<input class="input100" type="text" id="userId" name="userId" value="${userInfo.userId}" readonly="readonly">
+								<input class="input100" type="text" id="modifyId" name="userId" value="${userInfo.userId}" readonly="readonly">
 								<span class="focus-input100" data-symbol="&#xf206;"></span>
 							</div>
 							<br>		
 							<div class="wrap-input100 validate-input" data-validate = "Username is reauired" align="left">
 								<span class="label-input100">이름</span>
-								<input class="input100" type="text" id="userName" name="userName" value="${userInfo.userName}" placeholder="수정하실 이름을 입력해주세요.">
+								<input class="input100" type="text" id="modifyName" name="userName" value="${userInfo.userName}" placeholder="수정하실 이름을 입력해주세요.">
 								<span class="focus-input100" data-symbol="&#xf203;"></span>
 							</div>
 							<div id="nameblank" style="display: none;" align="left"></div>		
 							<br>							
 							<div class="wrap-input100 validate-input" data-validate="Password is required" align="left">
 								<span class="label-input100">비밀번호(수정을 원하시면 변경 버튼을 눌러 변경해주세요.)</span>
-								<input class="input100" type="password" id="userPass" name="userPass" value="${userInfo.userPass}" placeholder="수정하실 비밀번호를 입력해주세요" readonly="readonly">
+								<input class="input100" type="password" id="modifyPass" name="userPass" value="${userInfo.userPass}" placeholder="수정하실 비밀번호를 입력해주세요" readonly="readonly">
 								<span class="focus-input100" data-symbol="&#xf190;"></span>
 							</div>
 							<div id="pwblank" style="display: none;" align="left"></div>				
@@ -172,7 +172,7 @@
 							<br>
 							<div class="wrap-input100 validate-input" data-validate="Password is required" align="left">
 								<span class="label-input100">이메일</span>
-								<input class="input100" type="text" id="userEmail" name="userEmail" value="${userInfo.userEmail}">
+								<input class="input100" type="text" id="modifyEmail" name="userEmail" value="${userInfo.userEmail}">
 								<span class="focus-input100" data-symbol="&#xf15a;"></span>
 							</div>
 							<div id="emailblank" style="display: none;" align="left"></div>							

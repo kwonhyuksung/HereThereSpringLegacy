@@ -23,9 +23,10 @@ function deleteReviewPost(){
 function selectDibs(){
 	var url = _contextPath + "/common/selectDibs.do";
 	var sendData = {"postSeq" : _postSeq, "userId" : _loginUserId};
+	sendData = JSON.stringify(sendData);
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -72,9 +73,10 @@ $(document).on("click", "#myDibs", function() {
 	}
 	
 	var sendData = {"postSeq" : _postSeq, "userId" : _loginUserId};
+	sendData = JSON.stringify(sendData);
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -91,9 +93,10 @@ $(document).on("click", "#myDibs", function() {
 function selectRecommend(){
 	var url = _contextPath + "/common/selectRecommend.do";
 	var sendData = {"postSeq" : _postSeq, "userId" : _loginUserId};
+	sendData = JSON.stringify(sendData);
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -140,9 +143,10 @@ $(document).on("click", "#myRecommend", function() {
 	}
 	
 	var sendData = {"postSeq" : _postSeq, "userId" : _loginUserId};
+	sendData = JSON.stringify(sendData);
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -158,10 +162,11 @@ $(document).on("click", "#myRecommend", function() {
 function selectCommentList(){
 	var url = _contextPath + "/common/selectCommentList.do"
 	var sendData = {"postTypeCode" : 3, "boardCode" : 2, "groupNo" : _postSeq};
+	sendData = JSON.stringify(sendData);
 	
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -222,9 +227,11 @@ $(document).on("click", "#btnInsertComment", function() { //댓글 등록 버튼
 	
 	var sendData = {"postSeq" : _postSeq, "postTypeCode" : 3, "boardCode" : 2, "userId" : _loginUserId, "postTitle" : title, "postContent" : content,
 					"groupNo" : _postSeq, "depth" : 0, "parentSeq" : _postSeq};
+	sendData = JSON.stringify(sendData);
+	
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -266,9 +273,11 @@ $(document).on("click", "#btnUpdateComment", function() {
 	
 	$("#txtUpdateComment").val('');
 	var sendData = {"postSeq" : updateSeq, "postContent" : content};
+	sendData = JSON.stringify(sendData);
+	
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,
@@ -297,9 +306,11 @@ $(document).on("click", ".deleteComment", function() {
 	}
 	
 	var sendData = {"postSeq" : deleteSeq};
+	sendData = JSON.stringify(sendData);
+	
 	$.ajax({
 		url: url,
-		type: "get",
+		type: "post",
 		dataType: "json",
 		contentType : 'application/json;charset=UTF-8',		  
 		data: sendData,

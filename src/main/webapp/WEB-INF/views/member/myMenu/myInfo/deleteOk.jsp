@@ -6,5 +6,5 @@
 <c:set var="root" value="${pageContext.request.contextPath}"/>
 <script>	
 alert('아이디가 삭제되었습니다.'); 
-document.location.href = "${root}/index.jsp";
+document.location.href = "${root}/index.do";
 </script>

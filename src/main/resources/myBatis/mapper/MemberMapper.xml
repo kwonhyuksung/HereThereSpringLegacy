@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*)
+		from member
+		where user_id = #{id}
+	</select>
+	
+	<insert id="register" parameterType="memberVo">
+		insert into member(user_id, user_pass, user_name, user_email, join_date, admin_code)
+		values(#{userId}, #{userPass}, #{userName}, #{userEmail}, Now(), 0)                                       
+	</insert>
+    
+	<select id="login" parameterType="java.util.Map" resultType="memberVo">
+		select user_id, user_pass, user_name, user_email, join_date, admin_code
+		from member
+		where user_id = #{userId} and user_pass = #{userPass}
+	</select>
+    
+	<update id="updateMember" parameterType="java.util.Map">
+		update member set
+		user_pass = #{userPass},
+		user_name = #{userName},
+		user_email = #{userEmail}
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="deleteRelationTable" parameterType="java.util.Map">
+		delete from dibs
+		where user_id = #{userId};
+		
+		delete from recommend
+		where user_id = #{userId};
+		
+		delete from post_schedule
+		where post_seq in (select post_seq
+		from post
+		where user_id = #{userId} and post_type_code = 1);
+		
+		delete from post_review
+		where post_seq in (select post_seq
+		from post
+		where user_id = #{userId} and post_type_code = 2);
+		
+		delete from post_comment
+		where post_seq in (select post_seq
+		from post
+		where user_id = #{userId} and post_type_code = 3);
+		
+		delete from post
+		where post_seq in (select post_seq
+		from (select post_seq from post where user_id = #{userId}) temp);
+	</delete>
+	
+	<delete id="deleteMember" parameterType="java.util.Map">
+		delete from member
+		where user_id = #{userId};
+	</delete>
+	
+	<select id="selectMyScheduleList" parameterType="java.util.Map" resultType="scheduleVo">
+      	select a.post_seq as post_seq, post_type_code, board_code, user_id, post_title, hit_count, log_date, renewal_date,
+		schedule_seq, start_date, end_date, term, thema, origin_name, save_name, save_path,
+		dibs_count, recommend_count
+		from post a left join post_schedule b on a.post_seq = b.post_seq
+		left join (select a.post_seq as post_seq, count(b.dibs_seq) as dibs_count, count(c.recommend_seq) as recommend_count
+		from post a left join dibs b on a.post_seq = b.post_seq
+		left join recommend c on a.post_seq = c.post_seq
+		where a.post_type_code = #{postTypeCode}
+		group by a.post_seq) c on a.post_seq = c.post_seq
+		where a.post_type_code = #{postTypeCode}
+		and a.user_id = #{userId}
+		limit #{limit} offset #{offset}
+	</select>
+
+	<select id="getScheduleListTotalCount" parameterType="java.util.Map" resultType="int">
+		select count(*) as cnt
+		from post a left join post_schedule b on a.post_seq = b.post_seq
+		where a.post_type_code = #{postTypeCode}
+		and a.user_id = #{userId}
+	</select>
+	
+	<select id="selectMyReviewList" parameterType="java.util.Map" resultType="reviewVo">
+      	select a.post_seq as post_seq, post_type_code, board_code, user_id, post_title, hit_count, log_date, renewal_date,
+		review_seq, thema, origin_name, save_name, save_path,
+		dibs_count, recommend_count
+		from post a left join post_review b on a.post_seq = b.post_seq
+		left join (select a.post_seq as post_seq, count(b.dibs_seq) as dibs_count, count(c.recommend_seq) as recommend_count
+		from post a left join dibs b on a.post_seq = b.post_seq
+		left join recommend c on a.post_seq = c.post_seq
+		where a.post_type_code = #{postTypeCode}
+		group by a.post_seq) c on a.post_seq = c.post_seq
+		where a.post_type_code = #{postTypeCode}
+		and a.user_id = #{userId}
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="getReviewListTotalCount" parameterType="java.util.Map" resultType="int">
+		select count(*) as cnt
+		from post a left join post_review b on a.post_seq = b.post_seq
+		where a.post_type_code = #{postTypeCode}
+		and a.user_id = #{userId}
+	</select>
+
+</mapper>

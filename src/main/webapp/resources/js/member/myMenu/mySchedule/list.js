@@ -17,16 +17,17 @@ $(document).ready(function() {
 		
 });
 
-function makeList() {	
+function makeList() {
 	var urlStr = _contextPath + '/member/myMenu/mySchedule/list.do';
 	// 게시물 유형 코드(1=일정, 2=후기, 3=답변)
 	postTypeCode = 1;
-
-	var param = {"pg": currPageNum, "listNumOfRows": listNumOfRows, "postTypeCode": postTypeCode, "userId": _userId}
-			
+	var offset = (currPageNum - 1) * listNumOfRows;
+	var param = {"offset": offset, "limit": listNumOfRows, "postTypeCode": postTypeCode, "userId": _userId}
+	param = JSON.stringify(param);
+	
 	$.ajax({		
 		url : urlStr,
-		type : 'GET',
+		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
 		data: param,

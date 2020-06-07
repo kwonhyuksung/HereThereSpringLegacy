@@ -94,6 +94,7 @@ function makeList() {
 	var urlStr = _contextPath + '/schedule/list.do';
 	// 게시물 유형 코드(1=일정, 2=후기, 3=답변)
 	postTypeCode = 1;
+	var offset = (currPageNum - 1) * listNumOfRows;
 	// 페이지의 정렬(1=인기순, 2=최신순)
 	listOrder = $("#listOrder").val();
 	// 테마
@@ -105,12 +106,13 @@ function makeList() {
 	// 검색어
 	searchWord = $("#searchWord").val();
 	
-	var param = {"pg": currPageNum, "listNumOfRows": listNumOfRows, "postTypeCode": postTypeCode,
+	var param = {"offset": offset, "limit": listNumOfRows, "postTypeCode": postTypeCode,
 				 "order": listOrder, "thema": thema, "minTerm": minTerm, "maxTerm": maxTerm, "searchWord": searchWord};
+	param = JSON.stringify(param);
 	
 	$.ajax({		
 		url : urlStr,
-		type : 'GET',
+		type : 'POST',
 		contentType : 'application/json;charset=UTF-8',
 		dataType : 'json',
 		data: param,

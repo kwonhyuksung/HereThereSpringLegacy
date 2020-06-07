@@ -1,7 +1,5 @@
 // 대표 사진을 업로드하는가?(1:업로드 수행)
 var _uploadImage = 0;
-//대표 사진을 건드리면 수정해야 하고 아니면 수정하지 않아야한다(1:수정)
-var _updateImage = 0;
 
 $(document).ready(function() {
 	// set summermote
@@ -63,8 +61,8 @@ $(document).ready(function() {
 				$('#postContent').val(markup);
 				$("#term").val(getDateTerm());
 				$("#uploadImage").val(_uploadImage);
-				$("#updateImage").val(_updateImage);
-				if (_uploadImage == 0 || _updateImage == 0) {
+				if (_uploadImage == 0) {
+					$("#formWriteSchedule").attr("method", "GET");
 					$("#formWriteSchedule").attr("enctype", "application/x-www-form-urlencoded");
 				}
 				$("#formWriteSchedule").attr("action", _contextPath + "/schedule/rewrite.do").submit();
@@ -103,14 +101,14 @@ function uploadImage(file, el) {
 	$.ajax({
 		data: formData,
 		type: "POST",
-		url: _contextPath + "/schedule/uploadImage.do",
+		url: _contextPath + "/schedule/uploadImageSummernote.do",
 		cache: false,
 		contentType: false,
 		enctype: 'multipart/form-data',
 		processData: false,
-		success: function(url) {
+		success: function(data) {
 			// summernote에 이미지의 url을 삽입
-			$(el).summernote('editor.insertImage', url);
+			$(el).summernote('editor.insertImage', data.url);
 		}
 		
 	});
@@ -138,8 +136,6 @@ function uploadFile(){
 //파일을 업로드가 됐는지 on change로 알아냄
 $(function() {
     $("#uploadFile").on('change', function(){
-    	// 일단 변화가 감지되었다면 이미지는 업데이트 되어야 한다
-    	_updateImage = 1;
     	
         readURL(this);
     });

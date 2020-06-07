@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<settings>
+		<!-- 언더스코어 형식의 데이터베이스 컬럼 이름을 카멜케이스 형식의 VO 변수이름으로 자동변환  -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<!-- VO 파일을 별칭으로 설정해서 간편하게 사용 -->
+	<typeAliases>
+		<typeAlias type="com.spring.herethere.vo.MemberVo"  alias="memberVo" />
+		<typeAlias type="com.spring.herethere.vo.ScheduleVo"  alias="scheduleVo" />
+		<typeAlias type="com.spring.herethere.vo.ReviewVo"  alias="reviewVo" />
+		<typeAlias type="com.spring.herethere.vo.CommentVo"  alias="commentVo" />
+	</typeAliases>
+	
+</configuration>

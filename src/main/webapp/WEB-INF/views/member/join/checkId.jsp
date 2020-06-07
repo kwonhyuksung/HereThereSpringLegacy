@@ -29,7 +29,7 @@
 		}
 
 		function iduse(id) {
-			opener.document.getElementById("userId").value = id;
+			opener.document.getElementById("registerId").value = id;
 			self.close();
 		}
 	</script>

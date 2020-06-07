@@ -74,3 +74,4 @@ local.properties
 
 # kwon insert ignore
 target/
+test/

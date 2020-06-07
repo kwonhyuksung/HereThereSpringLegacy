@@ -59,8 +59,10 @@ $(document).ready(function() {
 				$("#term").val(getDateTerm());
 				$("#uploadImage").val(_uploadImage);
 				if (_uploadImage == 0) {
+					$("#formWriteSchedule").attr("method", "GET");
 					$("#formWriteSchedule").attr("enctype", "application/x-www-form-urlencoded");
 				}
+				
 				$("#formWriteSchedule").attr("action", _contextPath + "/schedule/write.do").submit();
 //				document.location.href = _contextPath + "/schedule/list.jsp";
 			}
@@ -89,14 +91,14 @@ function uploadImage(file, el) {
 	$.ajax({
 		data: formData,
 		type: "POST",
-		url: _contextPath + "/schedule/uploadImage.do",
+		url: _contextPath + "/schedule/uploadImageSummernote.do",
 		cache: false,
 		contentType: false,
 		enctype: 'multipart/form-data',
 		processData: false,
-		success: function(url) {
+		success: function(data) {
 			// summernote에 이미지의 url을 삽입
-			$(el).summernote('editor.insertImage', url);
+			$(el).summernote('editor.insertImage', data.url);
 		}
 		
 	});

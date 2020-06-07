@@ -36,12 +36,12 @@
 		var iderrorview = document.getElementById("idBlank");
 		var passerrorview = document.getElementById("passBlank");
 
-		if (document.getElementById("loginId").value.trim().length == 0) {
+		if (document.getElementById("userId").value.trim().length == 0) {
 			iderrorview.innerHTML = "<font color='red'>아이디를 입력하세요.</font>";
 			iderrorview.style = "display:";
 			passerrorview.style = "display: none";
 			return;
-		} else if (document.getElementById("loginPass").value.trim().length == 0) {
+		} else if (document.getElementById("userPass").value.trim().length == 0) {
 			passerrorview.innerHTML = "<font color='red'>비밀번호를 입력하세요.</font>";
 			passerrorview.style = "display:";
 			iderrorview.style = "display: none";
@@ -53,8 +53,8 @@
 	}
 	
     $("body").on("hidden.bs.modal", ".modal", function () {
-    	document.getElementById("loginId").value = null;
-    	document.getElementById("loginPass").value = null;
+    	document.getElementById("userId").value = null;
+    	document.getElementById("userPass").value = null;
     });
 	</script>
 	<!-- Modal -->
@@ -75,14 +75,14 @@
 						<br> <br>
 						<div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired" align="left">
 							<span class="label-input100">아이디</span>
-							<input class="input100"	type="text" name="loginId" id="loginId"	placeholder="아이디를 입력해주세요.">
+							<input class="input100"	type="text" name="userId" id="userId"	placeholder="아이디를 입력해주세요.">
 							<span class="focus-input100" data-symbol="&#xf206;"></span>
 						</div>
 						<div id="idBlank" style="display: none;"></div>
 						<br>
 						<div class="wrap-input100 validate-input" data-validate="Password is required" align="left">
 							<span class="label-input100">비밀번호</span>
-							<input class="input100"	type="password" name="loginPass" id="loginPass"	placeholder="비밀번호를 입력해주세요."	onkeypress="if(event.keyCode == 13){login(); return;}">
+							<input class="input100"	type="password" name="userPass" id="userPass"	placeholder="비밀번호를 입력해주세요."	onkeypress="if(event.keyCode == 13){login(); return;}">
 							<span class="focus-input100" data-symbol="&#xf190;"></span>
 						</div>
 						<div id="passBlank" style="display: none;"></div>

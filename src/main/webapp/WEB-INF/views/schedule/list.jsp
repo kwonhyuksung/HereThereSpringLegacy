@@ -91,7 +91,7 @@
 <!-- 여행기간 -->
 		        	<div class="form-group">
 		            	<div class="range-slider">
-		              		<label for="name">여행기간</label>
+		              		<label for="name">기간</label>
 		              		<span>
 								<input type="number" id="term1_number" value="1" min="1" max="60"/>일  -
 								<input type="number" id="term2_number" value="60" min="1" max="60"/>일

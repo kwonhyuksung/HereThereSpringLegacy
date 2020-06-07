@@ -27,7 +27,7 @@
 <c:if test="${userInfo == null}">
 	<script>	
 	alert('로그인 세션이 만료되었습니다.'); 
-	document.location.href = "${root}/index.jsp";
+	document.location.href = "${root}/index.do";
 	</script>
 </c:if>
 	

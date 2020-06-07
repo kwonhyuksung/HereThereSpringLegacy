@@ -43,7 +43,7 @@
 			<input type="hidden" name="boardCode" id="boardCode" value="1">
 			<input type="hidden" name="postContent" id="postContent" value="">
 			<input type="hidden" name="term" id="term" value="">
-			<input type="hidden" name="uploadImage" id="uploadImage" value="">
+			<input type="hidden" name="uploadImage" id="uploadImage" value="0">
 		
 			<div class="container">
 				<div class="row">

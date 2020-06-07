@@ -11,7 +11,7 @@
 	
 	<script type="text/javascript">
 	function deleteMember() {
-		if(document.getElementById("userPass").value.trim().length == 0){
+		if(document.getElementById("deletePass").value.trim().length == 0){
 			alert("비밀번호를 입력해주세요.")
 			return;
 		} else{
@@ -31,7 +31,7 @@
 <c:if test="${userInfo == null}">
 	<script>	
 	alert('로그인 세션이 만료되었습니다.'); 
-	document.location.href = "${root}/index.jsp";
+	document.location.href = "${root}/index.do";
 	</script>
 </c:if>
 
@@ -70,13 +70,13 @@
 							<br><br>
 							<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired" align="left">
 								<span class="label-input100">아이디</span>
-								<input class="input100" type="text" id="userId" name="userId" value="${userInfo.userId}" readonly="readonly">
+								<input class="input100" type="text" id="deleteId" name="userId" value="${userInfo.userId}" readonly="readonly">
 								<span class="focus-input100" data-symbol="&#xf206;"></span>
 							</div>				
 							<br>
 							<div class="wrap-input100 validate-input" data-validate="Password is required" align="left">
 								<span class="label-input100">비밀번호</span>
-								<input class="input100" type="password" id="userPass" name="userPass" placeholder="비밀번호입력">
+								<input class="input100" type="password" id="deletePass" name="userPass" placeholder="비밀번호입력">
 								<span class="focus-input100" data-symbol="&#xf190;"></span>
 							</div>							
 							<br><br>
