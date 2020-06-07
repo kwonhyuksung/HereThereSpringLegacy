@@ -42,8 +42,7 @@
 		<form action="" id="formWriteReview" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="postSeq" id="postSeq" value="${reviewVo.postSeq}">
 			<input type="hidden" name="postContent" id="postContent" value="">
-			<input type="hidden" name="uploadImage" id="uploadImage" value="">
-			<input type="hidden" name="updateImage" id="updateImage" value="">
+			<input type="hidden" name="uploadImage" id="uploadImage" value="0">
 		
 			<div class="container">
 				<div class="row">

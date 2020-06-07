@@ -44,7 +44,7 @@ $(document).ready(function() {
 	makeScheduleList();
 	
 	// Review List
-	//makeReviewList();
+	makeReviewList();
 	
 });
 

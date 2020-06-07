@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -61,8 +60,10 @@
 								<p class="days">
 									<span>
 										#${reviewVo.thema}<br>
-										<i class="icon-person"></i> ${reviewVo.userId} <br> 
-										<i class="icon-pencil"></i> 게시일 : ${reviewVo.logDate} &nbsp;|&nbsp; <i class="icon-pencil"></i> 최종 수정일 : ${reviewVo.renewalDate}<br>
+										<i class="icon-person"></i> ${reviewVo.userId} <br>
+										<fmt:formatDate var="fmtLogDate" pattern="yyyy-MM-dd HH:mm:ss" value="${reviewVo.logDate}"/>
+										<fmt:formatDate var="fmtRenewalDate" pattern="yyyy-MM-dd HH:mm:ss" value="${reviewVo.renewalDate}"/> 
+										<i class="icon-pencil"></i> 게시일 : ${fmtLogDate} &nbsp;|&nbsp; <i class="icon-pencil"></i> 최종 수정일 : ${fmtRenewalDate}<br>
 									</span>
 								</p>
 							</div>

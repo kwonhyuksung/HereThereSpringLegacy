@@ -1,7 +1,5 @@
 // 대표 사진을 업로드하는가?(1:업로드 수행)
 var _uploadImage = 0;
-// 대표 사진을 건드리면 수정해야 하고 아니면 수정하지 않아야한다(1:수정)
-var _updateImage = 0;
 
 $(document).ready(function() {
 	// set summermote
@@ -50,12 +48,14 @@ $(document).ready(function() {
 				var markup = $("#summernote").summernote("code"); // 내용 가져오는거
 				// summernote html은 개행을 거지같이 하기 때문에 아예 개행문자를 없애버리고 저장
 				markup = markup.replace(/\r\n/g, '');
+				
 				$("#postContent").val(markup);
 				$("#uploadImage").val(_uploadImage);
-				$("#updateImage").val(_updateImage);
-				if (_uploadImage == 0 || _updateImage == 0) {
+				if (_uploadImage == 0) {
+					$("#formWriteReview").attr("method", "GET");
 					$("#formWriteReview").attr("enctype", "application/x-www-form-urlencoded");
 				}
+				
 				$("#formWriteReview").attr("action", _contextPath + "/review/rewrite.do").submit();
 //				document.location.href = _contextPath + "/review/list.jsp";
 			}
@@ -108,21 +108,18 @@ function uploadFile(){
 //파일을 업로드가 됐는지 on change로 알아냄
 $(function() {
     $("#uploadFile").on('change', function(){
-    	// 일단 변화가 감지되었다면 이미지는 업데이트 되어야 한다
-    	_updateImage = 1;
-    	
         readURL(this);
     });
 })
 	
 //파일을 읽어서 대표사진태그에 이미지 URL 바꿔주는 메소드
-function readURL(input) {  		 
+function readURL(input) {
 	if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $('#mainImg').attr('style',"background-image: url('" + e.target.result + "');");
             _uploadImage = 1;
-        }  	 
+        }
         reader.readAsDataURL(input.files[0]);
     } else {
     	// 브라우저에서 아무것도 선택하지 않으면 file을 제대로 업로드 할 수 없다.

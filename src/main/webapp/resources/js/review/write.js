@@ -1,5 +1,6 @@
 // 대표 사진을 업로드하는가?(1:업로드 수행)
 var _uploadImage = 0;
+
 $(document).ready(function() {
 	// set summermote
 	$('#summernote').summernote({
@@ -48,6 +49,7 @@ $(document).ready(function() {
 				$('#postContent').val(markup);
 				$("#uploadImage").val(_uploadImage);
 				if (_uploadImage == 0) {
+					$("#formWriteReview").attr("method", "GET");
 					$("#formWriteReview").attr("enctype", "application/x-www-form-urlencoded");
 				}
 				$("#formWriteReview").attr("action", _contextPath + "/review/write.do").submit();

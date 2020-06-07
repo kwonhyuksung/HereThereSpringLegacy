@@ -17,7 +17,7 @@ import com.spring.herethere.vo.ScheduleVo;
 public class ScheduleServiceImpl implements ScheduleService {
 
 	@Autowired
-	ScheduleDao scheduleDao;
+	private ScheduleDao scheduleDao;
 
 	@Override
 	public int insertSchedule(Map<String, Object> map) {

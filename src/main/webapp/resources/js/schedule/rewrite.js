@@ -52,7 +52,7 @@ $(document).ready(function() {
 			alert('내용을 입력해 주세요.');
 			return;
 		} else {
-			var result = confirm("등록 하시겠습니까?");
+			var result = confirm("수정 하시겠습니까?");
 			if (result){
 				var markup = $("#summernote").summernote("code"); // 내용 가져오는거
 				// summernote html은 개행을 거지같이 하기 때문에 아예 개행문자를 없애버리고 저장
@@ -136,7 +136,6 @@ function uploadFile(){
 //파일을 업로드가 됐는지 on change로 알아냄
 $(function() {
     $("#uploadFile").on('change', function(){
-    	
         readURL(this);
     });
 })

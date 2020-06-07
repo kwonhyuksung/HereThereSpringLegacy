@@ -3,43 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.schedule">
+<mapper namespace="mapper.review">
 
-	<insert id="insertSchedule1" parameterType="java.util.Map">
+	<insert id="insertReview1" parameterType="java.util.Map">
 		insert into post(post_seq, post_type_code, board_code, user_id, post_title, post_content, log_date, renewal_date)
 		values(#{postSeq}, #{postTypeCode}, #{boardCode}, #{userId}, #{postTitle}, #{postContent}, Now(), Now())
 	</insert>
-	<insert id="insertSchedule2" parameterType="java.util.Map">
-		insert into post_schedule(post_seq, start_date, end_date, term, thema, origin_name, save_name, save_path)
-		values(#{postSeq}, #{startDate}, #{endDate}, #{term}, #{thema}, #{originName}, #{saveName}, #{savePath})
+	<insert id="insertReview2" parameterType="java.util.Map">
+		insert into post_review(post_seq, thema, origin_name, save_name, save_path)
+		values(#{postSeq}, #{thema}, #{originName}, #{saveName}, #{savePath})
 	</insert>
 	
-	<select id="selectSchedule" parameterType="String" resultType="ScheduleVo">
+	<select id="selectReview" parameterType="String" resultType="ReviewVo">
 		select a.post_seq as post_seq, post_type_code, board_code, user_id, post_title, post_content, hit_count, log_date, renewal_date,
-			schedule_seq, start_date, end_date, term, thema, origin_name, save_name, save_path,
+			review_seq, thema, origin_name, save_name, save_path,
 			dibs_count, recommend_count
-		from post a left join post_schedule b on a.post_seq = b.post_seq
+		from post a left join post_review b on a.post_seq = b.post_seq
 		left join (select a.post_seq as post_seq, count(b.dibs_seq) as dibs_count, count(c.recommend_seq) as recommend_count
-				from post a left join dibs b on a.post_seq = b.post_seq
-				left join recommend c on a.post_seq = c.post_seq
-				where a.post_seq = #{postSeq}
-				group by a.post_seq) c on a.post_seq = c.post_seq
+			from post a left join dibs b on a.post_seq = b.post_seq
+			left join recommend c on a.post_seq = c.post_seq
+			where a.post_seq = #{postSeq}
+			group by a.post_seq) c on a.post_seq = c.post_seq
 		where a.post_seq = #{postSeq}
 	</select>
 	
-	<update id="updateSchedule1" parameterType="java.util.Map">
+	<update id="updateReview1" parameterType="java.util.Map">
 		update post set
 		post_title = #{postTitle},
 		post_content = #{postContent},
 		renewal_date = Now()
 		where post_seq = #{postSeq}
 	</update>
-	<update id="updateSchedule2" parameterType="java.util.Map">
-		update post_schedule set
-		start_date = #{startDate}
-		, end_date = #{endDate}
-		, term = #{term}
-		, thema = #{thema}
+	<update id="updateReview2" parameterType="java.util.Map">
+		update post_review set
+		thema = #{thema}
 		<if test="uploadImage == 1">
 		, origin_name = #{originName}
 		, save_name = #{saveName}
@@ -48,7 +45,7 @@
 		where post_seq = #{postSeq}
 	</update>
 	
-	<delete id="deleteSchedule1" parameterType="java.util.Map">
+	<delete id="deleteReview1" parameterType="java.util.Map">
 		delete from dibs
 		where post_seq = #{postSeq};
 		
@@ -66,27 +63,26 @@
 			from post_comment
 			where group_no = #{postSeq});
 			
-		delete from post_schedule
+		delete from post_review
 		where post_seq = #{postSeq};
 	</delete>
-	<delete id="deleteSchedule2" parameterType="java.util.Map">
+	<delete id="deleteReview2" parameterType="java.util.Map">
 		delete from post
 		where post_seq = #{postSeq}
 	</delete>
 	
-	<select id="selectScheduleList" parameterType="java.util.Map" resultType="ScheduleVo">
+	<select id="selectReviewList" parameterType="java.util.Map" resultType="ReviewVo">
 		select a.post_seq as post_seq, post_type_code, board_code, user_id, post_title, hit_count, log_date, renewal_date,
-		schedule_seq, start_date, end_date, term, thema, origin_name, save_name, save_path,
-		dibs_count, recommend_count
-		from post a left join post_schedule b on a.post_seq = b.post_seq
+			review_seq, thema, origin_name, save_name, save_path,
+			dibs_count, recommend_count
+		from post a left join post_review b on a.post_seq = b.post_seq
 		left join (select a.post_seq as post_seq, count(b.dibs_seq) as dibs_count, count(c.recommend_seq) as recommend_count
 			from post a left join dibs b on a.post_seq = b.post_seq
 			left join recommend c on a.post_seq = c.post_seq
 			where a.post_type_code = #{postTypeCode}
 			group by a.post_seq) c on a.post_seq = c.post_seq
 		where a.post_type_code = #{postTypeCode}
-		<![CDATA[and (term >= #{minTerm} and term <= #{maxTerm})]]>
-		<if test="thema == '나홀로 여행' or thema == '친구와 함께' or thema == '커플 여행' or thema == '가족 여행' or thema == '단체 여행' or thema == '패키지 여행'">
+		<if test="thema == '장소 후기' or thema == '숙박 후기' or thema == '맛집 후기'">
 		and thema = #{thema}
 		</if>
 		<if test="searchWord != null and searchWord != ''">
@@ -103,12 +99,11 @@
 		limit #{limit} offset #{offset}
 	</select>
 	
-	<select id="getScheduleListTotalCount" parameterType="java.util.Map" resultType="int">
+	<select id="getReviewListTotalCount" parameterType="java.util.Map" resultType="int">
 		select count(*) as cnt
-		from post a left join post_schedule b on a.post_seq = b.post_seq
+		from post a left join post_review b on a.post_seq = b.post_seq
 		where a.post_type_code = #{postTypeCode}
-		<![CDATA[and (term >= #{minTerm} and term <= #{maxTerm})]]>
-		<if test="thema == '나홀로 여행' or thema == '친구와 함께' or thema == '커플 여행' or thema == '가족 여행' or thema == '단체 여행' or thema == '패키지 여행'">
+		<if test="thema == '장소 후기' or thema == '숙박 후기' or thema == '맛집 후기'">
 		and thema = #{thema}
 		</if>
 		<if test="searchWord != null and searchWord != ''">

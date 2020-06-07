@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -42,7 +41,7 @@
 			<input type="hidden" name="postTypeCode" id="postTypeCode" value="2">
 			<input type="hidden" name="boardCode" id="boardCode" value="2">
 			<input type="hidden" name="postContent" id="postContent" value="">
-			<input type="hidden" name="uploadImage" id="uploadImage" value="">
+			<input type="hidden" name="uploadImage" id="uploadImage" value="0">
 		
 			<div class="container">
 				<div class="row">
