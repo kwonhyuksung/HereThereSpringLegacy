@@ -86,11 +86,6 @@
 	function checkId() {
 		window.open("${root}/member/join/mvCheckId.do","checkId","top=200, left=100, width=500, height=350, menubar=no, status=no, toolbar=no, location=no, scrollbars=no");
 	}
-
-	window.history.forward();
-	function noBack() {
-		window.history.forward();
-	}
 	</script>	
 </head>
 <body>
@@ -145,7 +140,8 @@
 								<br>
 								<div class="row">
 									<div class="wrap-input100 validate-input" data-validate="Password is required" align="left">
-										<span class="label-input100">이메일 (비밀번호 찾기에 사용됩니다. 정확히입력해주세요.)</span>
+										<!-- <span class="label-input100">이메일 (비밀번호 찾기에 사용됩니다. 정확히입력해주세요.)</span> -->
+										<span class="label-input100">이메일 (정확히입력해주세요.)</span>
 										<input class="input100" type="text" id="registerEmail" name="userEmail"	placeholder="이메일입력">
 										<span class="focus-input100" data-symbol="&#xf15a;"></span>
 									</div>

@@ -16,7 +16,8 @@
 	
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
-  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca50421e20fdf6befdf1ab193f76de7e&libraries=services"></script>	
+  	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca50421e20fdf6befdf1ab193f76de7e&libraries=services"></script> -->	
+  	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3cc06fb98e5b94079fc4c8c8d8569357&libraries=services"></script>	
 	<script type="text/javascript">
 	var contextPath='<%=request.getContextPath()%>';
 	</script>

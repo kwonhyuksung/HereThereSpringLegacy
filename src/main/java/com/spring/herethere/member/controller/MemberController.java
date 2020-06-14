@@ -33,6 +33,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/member/join/mvRegister.do", method = RequestMethod.GET)
 	public String mvRegister() {
+		LogCheck.logger.info(LogCheck.logMsg + "mvRegister()");
 		return "member/join/register";
 	}
 
@@ -86,6 +87,8 @@ public class MemberController {
 		String path = request.getHeader("referer");
 		String contextPath = request.getContextPath();
 		MemberVo memberVo = memberService.login(map);
+
+		LogCheck.logger.info(LogCheck.logMsg + path);
 
 		if (memberVo != null) {
 			LogCheck.logger.info(LogCheck.logMsg + memberVo.toString());

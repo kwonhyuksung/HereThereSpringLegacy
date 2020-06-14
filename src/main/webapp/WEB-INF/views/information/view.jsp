@@ -7,7 +7,8 @@
 	<%@ include file="/WEB-INF/views/include/link.jsp"%>
 	<%@ include file="/WEB-INF/views/include/loader.jsp"%>
 	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca50421e20fdf6befdf1ab193f76de7e&libraries=services"></script>
+	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ca50421e20fdf6befdf1ab193f76de7e&libraries=services"></script> -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3cc06fb98e5b94079fc4c8c8d8569357&libraries=services"></script>
 	<script type="text/javascript">
 	var contextPath = '${root}';
 	</script>
